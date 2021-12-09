@@ -1,5 +1,9 @@
 import turtle  # imports
 import random
+from leaderboard import Leaderboard
+
+leaderboard = Leaderboard()
+player_name = input(">>> Enter your name:\n")
 
 wn = turtle.Screen()  # establishing the screen
 wn.bgcolor("black")  # changing the background to be black because i can
@@ -51,11 +55,16 @@ score_writer.pencolor("white")  # changes the color of the score text
 
 
 def countdown() -> None:
-    global timer, is_the_timer_up  # allows global access to these variables
+    global timer, is_the_timer_up, ex  # allows global access to these variables
     counter.clear()  # clears the counter
     if timer <= 0:  # checks if the timer is currently at 0 or less
         counter.write("Time's up!", font=FONT)  # tells the user that their time is up
         is_the_timer_up = True  # sets the variable to True to signal the game is over
+        leaderboard.write_to_leaderboard(
+            player_name, score
+        )  # adds the score to the leaderboard once the game is over
+        if is_the_timer_up:
+            leaderboard.display_leaderboard()
     else:
         counter.write(
             f"Timer: {timer}", font=FONT
@@ -88,14 +97,8 @@ def when_spot_is_clicked(x: int, y: int) -> None:
     if not is_the_timer_up:
         update_score()  # calls the above defined update_score() function if the timer is not up
         change_spot_position()  # calls the above defined change_spot_position() function
-        _ = (
-            alternate_colors.pop()
-        )  # removes one value from the list of alternate colors and sets it to an unnamed variable
-        spot.color(_)  # changes the color to the popped value
-        _ = (
-            alternate_sizes.pop()
-        )  # removes a value from the list of alternate sizes and sets it to an unnamed variable
-        spot.shapesize(_)  # changes the size to the size removed from the list
+        spot.color(random.choice(alternate_colors))
+        spot.shapesize(random.choice(alternate_sizes))
     else:
         spot.hideturtle()  # hides the spot when the timer is up
 
