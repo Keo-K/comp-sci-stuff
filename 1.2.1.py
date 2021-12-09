@@ -12,7 +12,7 @@ SPOT_SHAPE = "circle"  # setting constant variable circle, the shape will never 
 FONT = ("Arial", 20, "normal")
 default_spot_size = 5  # setting a default spot size value
 score = 0  # very important user variable, used for keeping track of score
-timer = 30  # very important variable, used for counting down the time and telling the user when the game is over
+timer = 5  # very important variable, used for counting down the time and telling the user when the game is over
 counting_interval = (
     1000  # the 1,000 represents 1 second, used in the counting down function
 )

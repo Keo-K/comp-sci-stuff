@@ -22,7 +22,8 @@ class Leaderboard:
             else sorted([x for x in current_data.values()])[::-1]
         )
         current_data = {
-            x: y for x, y in sorted(current_data.items(), key=lambda item: item[1])
+            x: y
+            for x, y in sorted(current_data.items(), key=lambda item: item[1])[::-1]
         }
         return current_data
 
